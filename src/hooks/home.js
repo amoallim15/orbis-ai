@@ -1,7 +1,11 @@
 import React from "react"
-import Search from "./search"
 import { makeStyles } from "@material-ui/core/styles"
-import { Box, Paper, List } from '@material-ui/core'
+import { Box } from "@material-ui/core"
+import Nav from "./nav"
+import Footer from "./footer"
+import Page from "./page"
+import BookmarkPage from "./bookmark-page"
+import { ContextProvider } from "./context"
 
 const useStyles = makeStyles((theme) => ({
   home: {
@@ -11,23 +15,28 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
   },
   divider: {
-    margin: 10
+    margin: 10,
   },
-  articles: {
-    width: 410,
-    color: "white"
-  }
 }))
 
 const Home = () => {
   const classes = useStyles()
+
   return (
-    <Box className={classes.home} flexDirection="column" display="flex" alignItems="center">
-      <Search  />
-      <List className={classes.articles}>
-        Hello world
-      </List>
-    </Box>
+    <ContextProvider>
+      <Box
+        className={classes.home}
+        flexDirection="column"
+        display="flex"
+        alignItems="center"
+        flexGrow={1}
+      >
+        <Nav />
+        <Page />
+        <BookmarkPage />
+        <Footer />
+      </Box>
+    </ContextProvider>
   )
 }
 
